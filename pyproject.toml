@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dignose"
+version = "0.1.0"
+description = "Windows read-only network environment diagnostic tool."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "pijiandan-source"}]
+dependencies = ["dnspython>=2.6.1"]
+
+[project.optional-dependencies]
+build = ["pyinstaller>=6.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+dignose = "dignose.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

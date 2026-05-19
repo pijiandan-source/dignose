@@ -1,0 +1,2 @@
+dnspython>=2.6.1
+pyinstaller>=6.0

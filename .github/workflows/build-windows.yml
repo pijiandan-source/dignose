@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +32,7 @@ jobs:
 
       - name: Build exe
         run: |
-          pyinstaller --onefile --name dignose --clean --noupx src/dignose/main.py
+          pyinstaller --onefile --name dignose --clean --noupx --paths src scripts/dignose_entry.py
 
       # TODO: code signing step
 
@@ -40,3 +42,15 @@ jobs:
           name: dignose-windows
           path: dist/dignose.exe
 
+      - name: Publish prerelease
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: prerelease-latest
+          name: dignose prerelease
+          body: |
+            Automated prerelease build from GitHub Actions.
+
+            This is a read-only Windows network diagnostic tool. The EXE is built with PyInstaller using `--noupx`.
+          prerelease: true
+          make_latest: false
+          files: dist/dignose.exe

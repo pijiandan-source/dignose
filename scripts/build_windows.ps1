@@ -6,7 +6,6 @@ Set-Location $ProjectRoot
 
 python -m pip install --upgrade pip
 python -m pip install -e . pyinstaller
-pyinstaller --onefile --name dignose --clean --noupx src/dignose/main.py
+pyinstaller --onefile --name dignose --clean --noupx --paths src scripts/dignose_entry.py
 
 Write-Host "Build complete: $ProjectRoot\dist\dignose.exe"
-
